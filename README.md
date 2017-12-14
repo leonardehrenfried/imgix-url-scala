@@ -1,13 +1,13 @@
 # imgix-url
 
-[![Latest version](https://index.scala-lang.org/leonardehrenfried/imgix-url/imgix-url/latest.svg)](https://index.scala-lang.org/leonardehrenfried/imgix-url/imgix-url)
+[![Latest version](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url/latest.svg)](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url)
 
 A tiny library for constructing Imgix URLs. Also available for ScalaJS.
 
 ## Installation
 
 ```
-libraryDependencies += "io.leonard" %%% "imgix-url-scala" % "0.0.1"
+libraryDependencies += "io.leonard" %%% "imgix-url" % "$version"
 ```
 
 ## Usage
