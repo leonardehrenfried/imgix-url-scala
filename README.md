@@ -2,7 +2,7 @@
 
 [![Latest version](https://index.scala-lang.org/leonardehrenfried/imgix-url/imgix-url/latest.svg)](https://index.scala-lang.org/leonardehrenfried/imgix-url/imgix-url)
 
-A tiny library for constructing Imgix URLs.
+A tiny library for constructing Imgix URLs. Also available for ScalaJS.
 
 ## Installation
 
