@@ -5,6 +5,7 @@ organization := "io.leonard"
 scalaVersion := "2.12.4"
 unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value)
 unmanagedSourceDirectories.in(Test) := Seq(scalaSource.in(Test).value)
+enablePlugins(ScalaJSPlugin)
 
 // POM settings for Sonatype
 homepage := Some(url("https://github.com/leonardehrenfried/imgix-url-scala"))
