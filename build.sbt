@@ -1,6 +1,18 @@
 import ReleaseTransformations._
+import sbtcrossproject.{crossProject, CrossType}
 
-name := "imgix-url"
+lazy val `imgix-url` =
+  crossProject(JSPlatform, JVMPlatform)
+    .crossType(CrossType.Pure)
+    .settings(
+      name := "imgix-url"
+    )
+    .jsSettings()
+    .jvmSettings()
+
+lazy val imgixUrlJS  = `imgix-url`.js
+lazy val imgixUrlJVM = `imgix-url`.jvm
+
 organization := "io.leonard"
 scalaVersion := "2.12.4"
 unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value)
