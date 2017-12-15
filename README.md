@@ -1,7 +1,7 @@
 # imgix-url
 
-[![Latest version](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url/latest.svg?style=flat-square)](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url)
-[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-1.0.0-M2.svg?style=flat-square)](https://www.scala-js.org)
+[![Latest version](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url/latest.svg)](https://index.scala-lang.org/leonardehrenfried/imgix-url-scala/imgix-url)
+[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-1.0.0-M2.svg)](https://www.scala-js.org)
 
 A tiny library for constructing Imgix URLs. Also available for ScalaJS.
 
