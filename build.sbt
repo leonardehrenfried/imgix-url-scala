@@ -5,30 +5,31 @@ lazy val `imgix-url` =
   crossProject(JSPlatform, JVMPlatform)
     .crossType(CrossType.Pure)
     .settings(
-      name := "imgix-url"
+      name := "imgix-url",
+      organization := "io.leonard",
+      scalaVersion := "2.12.4",
+      // POM settings for Sonatype
+      homepage := Some(url("https://github.com/leonardehrenfried/imgix-url-scala")),
+      scmInfo := Some(ScmInfo(url("https://github.com/leonardehrenfried/imgix-url-scala"),
+                              "git@github.com:leonardehrenfried/imgix-url-scala.git")),
+      developers := List(
+        Developer("leonardehrenfried",
+                  "Leonard Ehrenfried",
+                  "mail@leonard.io",
+                  url("https://github.com/leonardehrenfried"))),
+      licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+      publishMavenStyle := true,
+      releasePublishArtifactsAction := PgpKeys.publishSigned.value // Use publishSigned in publishArtifacts step
     )
     .jsSettings()
     .jvmSettings()
 
-lazy val imgixUrlJS  = `imgix-url`.js
-lazy val imgixUrlJVM = `imgix-url`.jvm
+lazy val `img-url-js`    = `imgix-url`.js
+lazy val `imgix-url-jvm` = `imgix-url`.jvm
 
-organization := "io.leonard"
-scalaVersion := "2.12.4"
-unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value)
-unmanagedSourceDirectories.in(Test) := Seq(scalaSource.in(Test).value)
-enablePlugins(ScalaJSPlugin)
-
-// POM settings for Sonatype
-homepage := Some(url("https://github.com/leonardehrenfried/imgix-url-scala"))
-scmInfo := Some(
-  ScmInfo(url("https://github.com/leonardehrenfried/imgix-url-scala"),
-          "git@github.com:leonardehrenfried/imgix-url-scala.git"))
-developers := List(
-  Developer("leonardehrenfried", "Leonard Ehrenfried", "mail@leonard.io", url("https://github.com/leonardehrenfried")))
-licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
-publishMavenStyle := true
-releasePublishArtifactsAction := PgpKeys.publishSigned.value // Use publishSigned in publishArtifacts step
+// disable publishing for root project, js and jvm are the actual artifacts
+publish := {}
+publishLocal := {}
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
