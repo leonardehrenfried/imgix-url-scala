@@ -1,4 +1,3 @@
-import ReleaseTransformations._
 import sbtcrossproject.{crossProject, CrossType}
 import xerial.sbt.Sonatype._
 
@@ -12,8 +11,7 @@ lazy val `imgix-url` =
       // POM settings for Sonatype
       sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
-      publishMavenStyle := true,
-      releasePublishArtifactsAction := PgpKeys.publishSigned.value // Use publishSigned in publishArtifacts step
+      publishMavenStyle := true
     )
     .jsSettings()
     .jvmSettings()
@@ -24,25 +22,6 @@ lazy val `imgix-url-jvm` = `imgix-url`.jvm
 // disable publishing for root project, js and jvm are the actual artifacts
 publish := {}
 publishLocal := {}
-
-releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,
-  inquireVersions,
-  runClean,
-  runTest,
-  setReleaseVersion,
-  commitReleaseVersion,
-  tagRelease,
-  publishArtifacts,
-  setNextVersion,
-  commitNextVersion,
-  releaseStepCommand("sonatypeReleaseAll"),
-  pushChanges
-)
-
-// defaults
-releaseTagComment := s"Release ${(version in ThisBuild).value}"
-releaseCommitMessage := s"Set version to ${(version in ThisBuild).value}"
 
 fork := false
 
