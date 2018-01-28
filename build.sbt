@@ -1,5 +1,6 @@
 import ReleaseTransformations._
 import sbtcrossproject.{crossProject, CrossType}
+import xerial.sbt.Sonatype._
 
 lazy val `imgix-url` =
   crossProject(JSPlatform, JVMPlatform)
@@ -9,14 +10,7 @@ lazy val `imgix-url` =
       organization := "io.leonard",
       scalaVersion := "2.12.4",
       // POM settings for Sonatype
-      homepage := Some(url("https://github.com/leonardehrenfried/imgix-url-scala")),
-      scmInfo := Some(ScmInfo(url("https://github.com/leonardehrenfried/imgix-url-scala"),
-                              "git@github.com:leonardehrenfried/imgix-url-scala.git")),
-      developers := List(
-        Developer("leonardehrenfried",
-                  "Leonard Ehrenfried",
-                  "mail@leonard.io",
-                  url("https://github.com/leonardehrenfried"))),
+      sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
       publishMavenStyle := true,
       releasePublishArtifactsAction := PgpKeys.publishSigned.value // Use publishSigned in publishArtifacts step
