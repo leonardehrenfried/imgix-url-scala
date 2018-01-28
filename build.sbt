@@ -19,6 +19,8 @@ lazy val `imgix-url` =
 lazy val `img-url-js`    = `imgix-url`.js
 lazy val `imgix-url-jvm` = `imgix-url`.jvm
 
+releaseEarlyWith in Global := SonatypePublisher
+
 // disable publishing for root project, js and jvm are the actual artifacts
 publish := {}
 publishLocal := {}
