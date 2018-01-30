@@ -11,7 +11,8 @@ lazy val `imgix-url` =
       // POM settings for Sonatype
       sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
-      publishMavenStyle := true
+      publishMavenStyle := true,
+      releaseEarlyWith := SonatypePublisher
     )
     .jsSettings()
     .jvmSettings()
