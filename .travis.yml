@@ -1,36 +1,32 @@
 sudo: false
 language: scala
 scala:
-  - 2.12.4
-
+- 2.12.4
 matrix:
   include:
   - env: SCALAJS_VERSION="0.6.22"
   - env: SCALAJS_VERSION="1.0.0-M2"
-
 cache:
   directories:
-    - $HOME/.ivy2/cache
-    - $HOME/.sbt/boot/
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt/boot/"
 before_cache:
-  # Tricks to avoid unnecessary cache updates
-  - find $HOME/.ivy2 -name "ivydata-*.properties" -delete
-  - find $HOME/.sbt -name "*.lock" -delete
-  - du -sh $HOME/.sbt/boot
-  - du -sh $HOME/.ivy2/cache
-
+- find $HOME/.ivy2 -name "ivydata-*.properties" -delete
+- find $HOME/.sbt -name "*.lock" -delete
+- du -sh $HOME/.sbt/boot
+- du -sh $HOME/.ivy2/cache
 script: sbt ++$TRAVIS_SCALA_VERSION compile
-
 deploy:
   on:
     tags: true
-
 before_install: |
   if [ $TRAVIS_PULL_REQUEST = "false" ]; then
     openssl aes-256-cbc -K $encrypted_0261605d70ea_key -iv $encrypted_0261605d70ea_iv -in travis/secrets.tar.enc -out travis/secrets.tar -d
     tar xv -C travis -f travis/secrets.tar;
   fi
-
 after_success:
-  - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then sbt ++$TRAVIS_SCALA_VERSION releaseEarly;
-    fi
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then sbt ++$TRAVIS_SCALA_VERSION releaseEarly;
+  fi
+env:
+  global:
+    secure: eR9vRHZLqWaQC/y7mkfoSM28rPYpqQ/b5kewl1aZXc56juD80ywoeIaVwWSjBfkYZW8egyBEtnkBn9IQjgOGVaHUm4Uwjp3bJYGac5WlPZhGhST4nV4+B+8R24l6gnpgLECSxdHWz3LOgCFBqAOi7/nIDVpq/ezMpfoTbbv8droNGP/BqEkCXHqkr5AE3MebMpI+2rricySYtr8M9/BJnhz8LSUZZEmssmX541uq/5XMnw/IVRDQl6GDUUYlky32AaZbCiOHwm8XAae3G/WUZ1A0QRqvKAL5cv+6JIn84jbIKuQxwG0qXsQOLlr4xy22ggW6j8Yj6eDwDzOWHijxIHsUZ3y6CZ+mzwjtobzKH9RXnHt9GnVmnKcaoShUhHSuqI7OC+XeqZCsT0iDDYH1qjt8WHIZng1XzBFkTFIWENfmRhkxrEkpCbJAfsbt0JhbktxxlZkfJ9e4pMkVkj2lNUgGYO+dygkywMSiXAjuFHU7Mf/p8bE0MdswuusHj+UP68qlRSYlBiG/ZuL8bxiQkHM09zmAEgd7z/0YzL1hrKVQ3fGKG/L6GWSIaPGjXrbuBRT7tFwSm2b55m4pnw/ycaQXPvz48RXUOgnJ/PueltB2EcdMGe39msyCY5SpMbWpQWPr/TgCeppHe0lcm7C9+dX2ekJS2kE0YlNYzjfB+jQ=
