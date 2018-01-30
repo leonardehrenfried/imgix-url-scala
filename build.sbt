@@ -12,7 +12,9 @@ lazy val `imgix-url` =
       sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
       publishMavenStyle := true,
-      releaseEarlyWith := SonatypePublisher
+      releaseEarlyWith := SonatypePublisher,
+      pgpPublicRing := file("./travis/local.pubring.asc"),
+      pgpSecretRing := file("./travis/local.secring.asc")
     )
     .jsSettings()
     .jvmSettings()
