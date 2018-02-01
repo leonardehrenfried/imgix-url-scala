@@ -9,6 +9,8 @@ if [[ "$TRAVIS_SECURE_ENV_VARS" == true ]]; then
   openssl aes-256-cbc -K $encrypted_0261605d70ea_key -iv $encrypted_0261605d70ea_iv -in travis/secrets.tar.enc -out travis/secrets.tar -d
   tar xv -C travis -f travis/secrets.tar;
 
+  ls -la
+
   if [ -n "$TRAVIS_TAG" ]; then
     echo "Tag push, publishing stable release to Sonatype."
     sbt publishSigned sonatypeReleaseAll
