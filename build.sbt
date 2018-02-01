@@ -34,3 +34,19 @@ publishTo in ThisBuild := Some(
   else
     Opts.resolver.sonatypeStaging
 )
+
+inScope(Global)(
+  Seq(
+    credentials ++= (for {
+      username <- sys.env.get("SONATYPE_USER")
+      password <- sys.env.get("SONATYPE_PASSWORD")
+    } yield
+      Credentials(
+        "Sonatype Nexus Repository Manager",
+        "oss.sonatype.org",
+        username,
+        password
+      )).toSeq,
+    PgpKeys.pgpPassphrase := sys.env.get("PGP_PASS").map(_.toCharArray())
+  )
+)
