@@ -11,9 +11,7 @@ lazy val `imgix-url` =
       // POM settings for Sonatype
       sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
-      publishMavenStyle := true,
-      pgpPublicRing := file("./travis/local.pubring.asc"),
-      pgpSecretRing := file("./travis/local.secring.asc")
+      publishMavenStyle := true
     )
     .jsSettings()
     .jvmSettings()
@@ -46,7 +44,6 @@ inScope(Global)(
         "oss.sonatype.org",
         username,
         password
-      )).toSeq,
-    PgpKeys.pgpPassphrase := sys.env.get("PGP_PASS").map(_.toCharArray())
+      )).toSeq
   )
 )
