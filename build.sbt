@@ -33,6 +33,27 @@ publishTo in ThisBuild := Some(
     Opts.resolver.sonatypeStaging
 )
 
+def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
+  val prefix = out.ref.dropV.value
+  val suffix = out.commitSuffix.mkString("-", "-", "") + out.dirtySuffix.dropPlus.mkString("-", "")
+  if(!suffix.isEmpty) {
+    prefix + suffix + "-SNAPSHOT"
+  }
+  else {
+    prefix
+  }
+}
+
+def fallbackVersion(d: java.util.Date): String = s"HEAD-${sbtdynver.DynVer timestamp d}"
+
+inThisBuild(List(
+  version := dynverGitDescribeOutput.value.mkVersion(versionFmt, fallbackVersion(dynverCurrentDate.value)),
+  dynver := {
+    val d = new java.util.Date
+    sbtdynver.DynVer.getGitDescribeOutput(d).mkVersion(versionFmt, fallbackVersion(d))
+  }
+))
+
 inScope(Global)(
   Seq(
     credentials ++= (for {
