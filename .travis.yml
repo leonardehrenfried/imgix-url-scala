@@ -16,10 +16,11 @@ jobs:
     script: sbt compile
   - env: SCALAJS_VERSION="1.0.0-M2"
     script: sbt compile
-  - stage: release
+  - stage: release 0.6
     env: SCALAJS_VERSION="0.6.22"
     script: "./travis/ci-publish.sh"
-  - env: SCALAJS_VERSION="1.0.0-M2"
+  - stage: release 1.0
+    env: SCALAJS_VERSION="1.0.0-M2"
     script: "./travis/ci-publish.sh"
 cache:
   directories:
