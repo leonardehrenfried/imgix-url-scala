@@ -36,7 +36,6 @@ publishTo in ThisBuild := Some(
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val prefix = out.ref.dropV.value
   if(out.isSnapshot) {
-    dynverCurrentDate.value.formatted()
     val suffix = out.commitSuffix.mkString("-", "-", "") + out.dirtySuffix.dropPlus.mkString("-", "")
     prefix + suffix + "-SNAPSHOT"
   }
