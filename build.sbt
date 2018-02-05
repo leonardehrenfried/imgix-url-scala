@@ -51,7 +51,9 @@ inThisBuild(List(
   dynver := {
     val d = new java.util.Date
     sbtdynver.DynVer.getGitDescribeOutput(d).mkVersion(versionFmt, fallbackVersion(d))
-  }
+  },
+  useGpg := true,
+  pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toArray)
 ))
 
 inScope(Global)(
