@@ -52,7 +52,7 @@ inThisBuild(List(
     val d = new java.util.Date
     sbtdynver.DynVer.getGitDescribeOutput(d).mkVersion(versionFmt, fallbackVersion(d))
   },
-  useGpg := true,
+  //useGpg := true,
   pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toArray)
 ))
 
