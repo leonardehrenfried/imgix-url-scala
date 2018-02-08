@@ -35,13 +35,17 @@ publishTo in ThisBuild := Some(
 
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val prefix = out.ref.dropV.value
-  if(out.isSnapshot) {
-    val suffix = out.commitSuffix.mkString("-", "-", "") + out.dirtySuffix.dropPlus.mkString("-", "")
-    prefix + suffix + "-SNAPSHOT"
+  val rev    = out.commitSuffix.mkString("+", "-", "")
+  val dirty  = out.dirtySuffix.value
+  val dynamicVersion = (rev, dirty) match {
+    case ("", "") =>
+      prefix
+    case (_, _) =>
+      // (version)+(distance)-(rev)
+      s"$prefix$rev"
   }
-  else {
-    prefix
-  }
+  val isRelease = !out.isSnapshot()
+  if (isRelease) dynamicVersion else s"$dynamicVersion-SNAPSHOT"
 }
 
 def fallbackVersion(d: java.util.Date): String = s"HEAD-${sbtdynver.DynVer timestamp d}"
