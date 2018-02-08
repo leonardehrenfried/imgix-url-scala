@@ -21,7 +21,9 @@ lazy val `imgix-url` =
       pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toArray)
     )
     .jsSettings()
-    .jvmSettings()
+    .jvmSettings(
+      publishArtifact := !scalaJSBinaryVersion.startsWith("1")
+    )
 
 lazy val `img-url-js`    = `imgix-url`.js
 lazy val `imgix-url-jvm` = `imgix-url`.jvm
@@ -46,16 +48,14 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val rev    = out.commitSuffix.mkString("+", "-", "")
   val dirty  = out.dirtySuffix.value
 
-  val x = (rev, dirty) match {
-    case _ if out.hasNoTags() =>
-      s"0.0.0-$prefix"
+  val ver = (rev, dirty) match {
     case ("", "") =>
       prefix
     case (_, _) =>
       // (version)+(distance)-(rev)
       prefix + rev
   }
-  val dynamicVersion = if (out.hasNoTags()) s"0.0.0-${out.version}" else out.version
+  val dynamicVersion = if (out.hasNoTags()) s"0.0.0-${out.version}" else ver
   val isSnapshot     = out.isSnapshot() || out.hasNoTags()
   if (isSnapshot) s"$dynamicVersion-SNAPSHOT" else dynamicVersion
 }
