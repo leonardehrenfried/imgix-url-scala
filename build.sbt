@@ -1,5 +1,5 @@
-import sbtcrossproject.{crossProject, CrossType}
 import xerial.sbt.Sonatype._
+import sbtcrossproject.{crossProject, CrossType}
 
 lazy val `imgix-url` =
   crossProject(JSPlatform, JVMPlatform)
@@ -22,7 +22,7 @@ lazy val `imgix-url` =
     )
     .jsSettings()
     .jvmSettings(
-      publishArtifact := !scalaJSBinaryVersion.startsWith("1")
+      publishArtifact := !scalaJSVersion.startsWith("1")
     )
 
 lazy val `img-url-js`    = `imgix-url`.js
