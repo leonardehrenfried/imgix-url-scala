@@ -37,15 +37,20 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val prefix = out.ref.dropV.value
   val rev    = out.commitSuffix.mkString("+", "-", "")
   val dirty  = out.dirtySuffix.value
-  val dynamicVersion = (rev, dirty) match {
+
+  val x = (rev, dirty) match {
+    case _ if out.hasNoTags() =>
+      s"0.0.0-$prefix"
     case ("", "") =>
       prefix
     case (_, _) =>
       // (version)+(distance)-(rev)
-      s"$prefix$rev"
+      prefix + rev
   }
-  val isRelease = !out.isSnapshot()
-  if (isRelease) dynamicVersion else s"$dynamicVersion-SNAPSHOT"
+  val dynamicVersion = if(out.hasNoTags()) s"0.0.0-${out.version}"
+  else out.version
+  val isSnapshot = out.isSnapshot() || out.hasNoTags()
+  if (isSnapshot) s"$dynamicVersion-SNAPSHOT" else dynamicVersion
 }
 
 def fallbackVersion(d: java.util.Date): String = s"HEAD-${sbtdynver.DynVer timestamp d}"
