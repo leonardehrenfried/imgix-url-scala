@@ -16,11 +16,14 @@ jobs:
     script: sbt compile
   - env: SCALAJS_VERSION="1.0.0-M2"
     script: sbt compile
-  - stage: release
+  - stage: publishSigned
     env: SCALAJS_VERSION="0.6.22"
     script: "./travis/ci-publish.sh"
   - env: SCALAJS_VERSION="1.0.0-M2"
     script: "./travis/ci-publish.sh"
+  - stage: release
+    script: "sbt imgix-urlJVM/sonatypeReleaseAll"
+
 cache:
   directories:
   - "$HOME/.sbt/0.13/dependency"
