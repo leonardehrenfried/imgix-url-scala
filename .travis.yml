@@ -8,6 +8,7 @@ matrix:
   - env: SCALAJS_VERSION="1.0.0-M2"
 stages:
 - name: test
+- name: publishSigned
 - name: release
   if: "(type = push)"
 jobs:
@@ -22,7 +23,7 @@ jobs:
   - env: SCALAJS_VERSION="1.0.0-M2"
     script: "./travis/ci-publish.sh"
   - stage: release
-    script: "sbt imgix-urlJVM/sonatypeReleaseAll"
+    script: "./travis/ci-release.sh"
 
 cache:
   directories:
