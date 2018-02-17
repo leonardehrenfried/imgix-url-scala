@@ -37,12 +37,7 @@ publishArtifact := false
 fork := false
 
 // Add sonatype repository settings
-publishTo in ThisBuild := Some(
-  if (isSnapshot.value)
-    Opts.resolver.sonatypeSnapshots
-  else
-    Opts.resolver.sonatypeStaging
-)
+publishTo in ThisBuild := sonatypePublishTo.value
 
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val prefix = out.ref.dropV.value
