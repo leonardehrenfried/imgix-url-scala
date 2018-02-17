@@ -29,6 +29,7 @@ lazy val `img-url-js`    = `imgix-url`.js
 lazy val `imgix-url-jvm` = `imgix-url`.jvm
 
 // disable publishing for root project, js and jvm are the actual artifacts
+organization := "io.leonard"
 publish := {}
 publishLocal := {}
 publishArtifact := false
