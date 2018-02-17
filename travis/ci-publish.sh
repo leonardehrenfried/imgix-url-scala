@@ -12,7 +12,7 @@ if [[ "$TRAVIS_SECURE_ENV_VARS" == true ]]; then
 
   if [ -n "$TRAVIS_TAG" ]; then
     echo "Tag push, publishing stable release to Sonatype."
-    sbt publishSigned sonatypeReleaseAll
+    sbt publishSigned
   else
     echo "Merge, publishing snapshot to Sonatype."
     sbt publishSigned

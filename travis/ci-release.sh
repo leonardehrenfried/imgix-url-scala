@@ -2,8 +2,6 @@
 set -eu
 
 if [[ "$TRAVIS_SECURE_ENV_VARS" == true ]]; then
-  echo "Publishing..."
-
   if [ -n "$TRAVIS_TAG" ]; then
     echo "Tag push, publishing stable release to Sonatype."
     sbt sonatypeReleaseAll
