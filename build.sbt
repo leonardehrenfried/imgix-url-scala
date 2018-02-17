@@ -9,7 +9,7 @@ lazy val `imgix-url` =
       organization := "io.leonard",
       scalaVersion := "2.12.4",
       // POM settings for Sonatype
-      sonatypeProjectHosting := Some(GithubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
+      sonatypeProjectHosting := Some(GitHubHosting("leonardehrenfried", "imgix-url-scala", "mail@leonard.io")),
       licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
       publishMavenStyle := true,
       version := dynverGitDescribeOutput.value.mkVersion(versionFmt, fallbackVersion(dynverCurrentDate.value)),
